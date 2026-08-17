@@ -126,7 +126,8 @@
     font-family:var(--mono); font-size:12px; letter-spacing:0.1em; text-transform:uppercase;
     color:var(--teal-deep); margin:0 0 8px;
   }
-  h2{font-size:26px; margin:0 0 30px; letter-spacing:-0.01em;}
+  h2{font-size:26px; margin:0 0 12px; letter-spacing:-0.01em;}
+  .section-sub{color:var(--ink-soft); font-size:15px; margin:0 0 30px; max-width:620px;}
 
   /* ---------- STACK ---------- */
   .stackgrid{display:grid; grid-template-columns:repeat(auto-fit,minmax(230px,1fr)); gap:22px;}
@@ -147,20 +148,40 @@
   }
   .project-top{display:flex; justify-content:space-between; align-items:flex-start; gap:16px; flex-wrap:wrap; margin-bottom:10px;}
   .project h3{font-size:19px; margin:0; letter-spacing:-0.01em;}
+  .badge-row{display:flex; gap:8px; flex-wrap:wrap;}
   .project .tag{
     font-family:var(--mono); font-size:11px; letter-spacing:0.05em; text-transform:uppercase;
     color:var(--teal-deep); background:#E4F3F3; padding:4px 9px; border-radius:5px;
+    white-space:nowrap;
+  }
+  .project .tag.nda{
+    color:var(--ink-soft); background:#E7EAEF;
+  }
+  .project .tag.open{
+    color:var(--green); background:#E4F7EE;
   }
   .project p{color:var(--ink-soft); margin:0 0 16px; font-size:15px;}
   .project ul{margin:0 0 18px; padding-left:18px; color:var(--ink-soft); font-size:14.5px;}
   .project ul li{margin-bottom:5px;}
   .project .pills{margin-bottom:18px;}
-  .project-links{display:flex; gap:10px;}
+  .project-links{display:flex; gap:10px; align-items:center; flex-wrap:wrap;}
   .link-chip{
     font-family:var(--mono); font-size:12.5px; text-decoration:none; color:var(--ink);
     border:1px solid var(--line); padding:7px 13px; border-radius:6px; display:inline-flex; gap:6px; align-items:center;
   }
   .link-chip:hover{border-color:var(--teal); color:var(--teal-deep);}
+  .confidential-note{
+    font-family:var(--mono); font-size:12.5px; color:var(--ink-soft); font-style:normal;
+  }
+
+  .subsection-label{
+    font-family:var(--mono); font-size:12px; letter-spacing:0.08em; text-transform:uppercase;
+    color:var(--ink-soft); margin:34px 0 14px; display:flex; align-items:center; gap:10px;
+  }
+  .subsection-label:first-of-type{margin-top:0;}
+  .subsection-label::after{
+    content:''; flex:1; height:1px; background:var(--line);
+  }
 
   /* ---------- EXPERIENCE ---------- */
   .xp-row{
@@ -293,11 +314,61 @@
   <section id="work">
     <p class="kicker">Featured work</p>
     <h2>Projects</h2>
+    <p class="section-sub">A mix of production systems I've shipped for employers and open-source projects you can inspect end-to-end.</p>
+
+    <p class="subsection-label">Professional Work</p>
+
+    <div class="project">
+      <div class="project-top">
+        <h3>Loan Management System (LMS)</h3>
+        <div class="badge-row">
+          <span class="tag nda">Production · NDA</span>
+        </div>
+      </div>
+      <p>Backend microservices for a fintech Loan Management System handling loans, transfers, and core financial transactions — built as part of a distributed microservices architecture at AXAIN.</p>
+      <ul>
+        <li>Built .NET Core backend services processing high-volume financial transactions</li>
+        <li>Designed schedulers and RabbitMQ consumers for async data preprocessing and transaction execution</li>
+        <li>Used Redis for caching and PostgreSQL for core transaction data, coordinating with a distributed engineering team</li>
+      </ul>
+      <div class="pills">
+        <span class="pill">.NET Core</span><span class="pill">RabbitMQ</span><span class="pill">Redis</span><span class="pill">PostgreSQL</span><span class="pill">Microservices</span>
+      </div>
+      <div class="project-links">
+        <span class="confidential-note">🔒 Codebase is confidential — happy to walk through the architecture on a call.</span>
+      </div>
+    </div>
+
+    <div class="project">
+      <div class="project-top">
+        <h3>B2B E-commerce Platform</h3>
+        <div class="badge-row">
+          <span class="tag nda">Production · NDA</span>
+        </div>
+      </div>
+      <p>End-to-end backend for a B2B e-commerce platform at Sanwa Systems, covering inventory management, order processing, and business-client-specific pricing and roles.</p>
+      <ul>
+        <li>Led backend development on ASP.NET Core — inventory, order processing, and role-based access</li>
+        <li>Built serverless AWS Lambda functions for conditional database operations, reducing manual processing</li>
+        <li>Set up CI/CD pipelines and Docker containerization on Linux, standardizing releases</li>
+      </ul>
+      <div class="pills">
+        <span class="pill">ASP.NET Core</span><span class="pill">AWS Lambda</span><span class="pill">Docker</span><span class="pill">CI/CD</span>
+      </div>
+      <div class="project-links">
+        <span class="confidential-note">🔒 Codebase is confidential — happy to walk through the architecture on a call.</span>
+      </div>
+    </div>
+
+    <p class="subsection-label">Open Source / Personal Projects</p>
 
     <div class="project">
       <div class="project-top">
         <h3>NotifyHub — Distributed Notification Delivery Platform</h3>
-        <span class="tag">Systems Design</span>
+        <div class="badge-row">
+          <span class="tag open">Open Source</span>
+          <span class="tag">Systems Design</span>
+        </div>
       </div>
       <p>A backend system that reliably delivers notifications across email/SMS/push — the same class of problem behind SendGrid's dispatch layer. Built to demonstrate production patterns, not just CRUD.</p>
       <ul>
@@ -316,7 +387,10 @@
     <div class="project">
       <div class="project-top">
         <h3>Bookstore API</h3>
-        <span class="tag">Auth &amp; CRUD</span>
+        <div class="badge-row">
+          <span class="tag open">Open Source</span>
+          <span class="tag">Auth &amp; CRUD</span>
+        </div>
       </div>
       <p>A RESTful ASP.NET Core API covering the operational backbone of an online bookstore — users, inventory, orders, and reporting — with production-grade auth and logging.</p>
       <ul>
